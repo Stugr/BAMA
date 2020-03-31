@@ -1,0 +1,19 @@
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^([a-z.]+)?pixelforbreakfast\.com$ [NC]  
+RewriteCond %{HTTP_HOST} !^www\. [NC]  
+RewriteRule .? http://www.%1pixelforbreakfast.com%{REQUEST_URI} [R=301,L]
+RewriteRule ^(.*)-(.*)$ $1_$2 [L]
+RewriteRule ^.+(includes/.+)$ $1 [L]
+RewriteRule ^.+(images/.+)$ $1 [L]
+RewriteRule ^(en|de)$ index.php?language=$1
+RewriteRule ^(en|de)/$ index.php?language=$1
+RewriteRule ^(en|de)/company/? unternehmen.php?language=$1 [L]
+RewriteRule ^(en|de)/products/? produkte.php?language=$1 [L]
+RewriteRule ^(en|de)/delivery/? lieferung.php?language=$1 [L]
+RewriteRule ^(en|de)/environment/? umwelt.php?language=$1 [L]
+RewriteRule ^(en|de)/contact/? kontakt.php?language=$1&%{QUERY_STRING} [L]
+RewriteRule ^(en|de)/(.*)/ $2.php?language=$1&%{QUERY_STRING} [L]
+RewriteRule ^(en|de)/(.*) $2.php?language=$1&%{QUERY_STRING} [L]
+RewriteCond %{REQUEST_FILENAME} !-f  
+RewriteCond %{REQUEST_FILENAME} !-d  
+RewriteRule ^/?(.*)$ 404.php?url=$1 [L]
